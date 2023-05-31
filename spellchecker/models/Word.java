@@ -7,15 +7,10 @@ public class Word extends CheckableText {
     this.text = text;
   }
 
-  // check the word
   public boolean check(Database database) {
-    if(database.checkWord(this.text)) {
-      return true;
-    }
-    return false;
+    return database.checkWord(this.text);
   }
 
-  // return the length
   public int length() {
     return this.text.length();
   }

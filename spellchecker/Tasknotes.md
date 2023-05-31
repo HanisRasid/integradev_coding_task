@@ -3,7 +3,15 @@ Please spend 3-4 hours reviewing the application and it's code.
 # What does the application do?
 This application is a simple spellchecker program that consists of several components such as the UI, database, business logic classes and a launcher. At launch, the app creates the GUI, initialises a database of words from the `dictionary.txt` file and constantly awaits for user input. Once the user inputs a word or phrase, it is then represented as either a `Text` or a `Word` object and checked against the database for spelling. If the word is found, it is spelt correctly and the app provides feedback in the GUI. If not found, the word is considered to be spelt wrong.
 # Does it follow best coding practice? If not what would you change?
-
+The code has some issues and thus does not follow the best coding practices. Some code smells and issues that I found and should be changed are as follows:
+- Comments
+    - There are a lot of unnecessary comments that don't help with explaining the code. It is best practice to minise the nubmer of comments and instead use good naming conventions to explain code.
+- Print statements for debugging
+    - Not needed for the code to run. Deployable code should not have print debugging.
+- Dead code
+    - Unused fields and imports just add clutter and are not needed.
+- Consolidate conditional expressions
+    - There are some overly convoluted conditional expressions that could be simplified. In doing so, it improves the readability of the code.
 # How well does it display the Object Oriented design principles?
 Although the code shows some adherence to the OOP design principles, there are definitely areas for improvement. Let us go through some examples of good OOP practices found within the code.
 
