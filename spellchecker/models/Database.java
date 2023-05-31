@@ -11,8 +11,20 @@ import java.io.*;
 
 import java.util.UUID;
 
-public class Database {
+public final class Database {
+  //singleton
+  private static Database instance;
   private Connection connection;
+
+  private Database(){}
+  
+  //thread safe method
+  public static synchronized Database getInstance() {
+    if (instance ==null) {
+      instance = new Database();
+    }
+    return instance;
+  }
 
   public boolean createTable() {
 

@@ -5,10 +5,21 @@ import java.awt.GridLayout;
 import java.lang.Thread;
 import java.lang.NullPointerException;
 
-class UserInterface extends Thread {
+public class UserInterface extends Thread {
+  //singleton
+  private static UserInterface instance;
   private JTextField field;
   private JLabel resultLabel;
 
+  private UserInterface(){}
+
+  public static synchronized UserInterface getInstance() {
+    if (instance == null) {
+      instance = new UserInterface();
+    }
+    return instance;
+  }
+  
   public JFrame createWindow() {
     JFrame window = new JFrame("Spell checker");
     JPanel content = new JPanel();

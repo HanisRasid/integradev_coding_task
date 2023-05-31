@@ -5,8 +5,8 @@ import spellchecker.models.*;
 public class Launcher {
 
 	public static void main(String[] args) {
-    UserInterface ui = new UserInterface();
-		Database database = new Database();
+		UserInterface ui = UserInterface.getInstance();
+		Database database = Database.getInstance();
 		CheckableText checkableText;
 
 		String previousText = "";
@@ -18,18 +18,18 @@ public class Launcher {
 		// create the user interface (thread)
 		ui.start();
 
-		while(true) {
+		while (true) {
 			currentText = ui.getTextInput();
 
-			if(previousText == null || currentText == null) {
+			if (previousText == null || currentText == null) {
 				continue;
 			}
 
 			// update if text has changed
-			if(!currentText.equals(previousText)) {
+			if (!currentText.equals(previousText)) {
 				previousText = currentText;
 				currentText = ui.getTextInput();
-				if(currentText.contains(" ")) {
+				if (currentText.contains(" ")) {
 					// contains a space
 					checkableText = new Text(currentText);
 				} else {
@@ -41,5 +41,5 @@ public class Launcher {
 			}
 		}
 
-  }
+	}
 }

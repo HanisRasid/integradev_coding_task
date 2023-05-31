@@ -23,7 +23,8 @@ Although the code shows some adherence to the OOP design principles, there are d
 The code follows a Model-View-Controller design pattern. Although the naming conventions don't make it explicitly clear, the separation of responsibilites follow that of the MVC design pattern. The `UserInterface` class acts as the view, `Database` as the model and the `CheckableText` can be seen as part of the controller since it is used for spell checking.
 
 Patterns that could be used are as follows:
-- Factory Method: Encapsulate the creation of `CheckableText` type objects by creating a separate factory class
+- Singleton
+    - A singleton pattern can be implemented in the `Database` class since there can only be one instance of the database connection in the application. Same goes for the `UserInterface` class.
 ## To compile and run:
 1. mv SpellChecker spellchecker
 2. javac spellchecker/*.java spellchecker/models/*.java
