@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "spellchecker/sqlite/sqlite.jar"
+    ]
+}
