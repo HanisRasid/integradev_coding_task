@@ -12,25 +12,11 @@ import java.io.*;
 import java.util.UUID;
 
 public class Database {
-  public Connection connection;
+  private Connection connection;
 
   public boolean createTable() {
-    /**
-     * Create the table for the database, if it doesn't already exist
-     */
 
-    ArrayList<String> queryArray = new ArrayList<String>();
-    queryArray.add("create table if not exists words (");
-    queryArray.add("id varchar(36) NOT NULL, ");
-    queryArray.add("word varchar(255) NOT NULL, ");
-    queryArray.add("primary key (id)");
-    queryArray.add(")");
-
-    // construct query string
-    String query = "";
-    for(int i=0; i<queryArray.size(); i++) {
-      query += queryArray.get(i);
-    }
+    String query = "create table if not exists words (id varchar(36) NOT NULL, word varchar(255) NOT NULL, primary key (id))";
 
     try {
       Statement statement = this.connection.createStatement();
@@ -68,9 +54,6 @@ public class Database {
   }
 
   public int getWordCount() {
-    /**
-     * Get the current word count in the database
-     */
 
     String query = "select count(*) as count from words";
     int count = 0; // default
@@ -94,15 +77,12 @@ public class Database {
   }
 
   public boolean addWordToDatabase(String word) {
-    /**
-     * Add a single word to the database
-     */
 
    String baseQuery =  "insert into words (id, word) values ";
    String uuid = UUID.randomUUID().toString();
-   //return true;
+
    String query = baseQuery + "(\"" + uuid + "\", \"" + word + "\")";
-   //System.out.println(query);
+
 
 
    try {
@@ -118,12 +98,9 @@ public class Database {
   }
 
   public ArrayList<String> getWords() {
-    /**
-     * Print out all the words in the database
-     */
+
     System.out.println("Getting all words");
     String query = "select * from words";
-    String id;
     String word;
 
     ArrayList<String> words = new ArrayList<String>();
@@ -134,7 +111,7 @@ public class Database {
       ResultSet set = statement.executeQuery(query);
       // populate the arraylist
       while(set.next()) {
-        id = set.getString("id");
+        set.getString("id");
         word = set.getString("word");
 
         words.add(word);
@@ -194,6 +171,7 @@ public class Database {
       while ((word = reader.readLine()) != null) {
         addWordToDatabase(word);
       }
+      reader.close();
     } catch (FileNotFoundException ex) {
       // file does not exist
       System.out.println(ex);
@@ -216,8 +194,6 @@ public class Database {
       Connection conn = DriverManager.getConnection(url);
       if (conn != null) {
         this.connection = conn;
-        DatabaseMetaData meta = conn.getMetaData();
-
         return conn;
       }
     } catch (SQLException e) {
@@ -249,8 +225,6 @@ public class Database {
     boolean resetDatabase = false;
     boolean seedDatabase = true;
     boolean printDatabase = true;
-    boolean wordTest = true;
-
     // print out the database URL
     System.out.println("URL is " + url);
 

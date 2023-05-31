@@ -1,18 +1,13 @@
 package spellchecker;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.*;
-
 import java.lang.Thread;
 import java.lang.NullPointerException;
 
 class UserInterface extends Thread {
-  private JFrame frame;
   private JTextField field;
   private JLabel resultLabel;
-  private String currentText;
 
   public JFrame createWindow() {
     JFrame window = new JFrame("Spell checker");
@@ -36,7 +31,6 @@ class UserInterface extends Thread {
 
     window.setVisible(true);
 
-    this.frame = window;
     this.field = textField;
     this.resultLabel = resultLabel;
 
@@ -48,19 +42,16 @@ class UserInterface extends Thread {
   }
 
   public String getTextInput() {
-    String text;
-    try {
-      text = this.field.getText();
-    } catch (NullPointerException ex) {
-      // there is no text
-      text = "";
-    }
 
-    return text;
+    try {
+      return this.field.getText();
+    } catch (NullPointerException ex) {
+      return "";
+    }
   }
 
   public void updateResultLabel(boolean value) {
-    if(value) {
+    if (value) {
       this.resultLabel.setText("Your spellling is correct!");
     } else {
       this.resultLabel.setText("Check your spelling.");
